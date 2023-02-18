@@ -6,22 +6,22 @@ const {shuffleArray} = require('./utils')
 
 const {SERVER_PORT, ROLLBAR_ACCESSTOKEN} = process.env;
 
-var Rollbar = require('rollbar')
+// var Rollbar = require('rollbar')
 app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 
 // include and initialize the rollbar library with your access token
-var rollbar = new Rollbar({
-  accessToken: `${ROLLBAR_ACCESSTOKEN}`,
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-})
+// var rollbar = new Rollbar({
+//   accessToken: `${ROLLBAR_ACCESSTOKEN}`,
+//   captureUncaught: true,
+//   captureUnhandledRejections: true,
+// })
 
 app.get('/api/robots', (req, res) => {
     try {
         res.status(200).send(botsArr)
     } catch (error) {
-        rollbar.log(`ERROR GETTING BOTS ${error}`)
+        // rollbar.log(`ERROR GETTING BOTS ${error}`)
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
@@ -34,7 +34,7 @@ app.get('/api/robots/five', (req, res) => {
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
     } catch (error) {
-        rollbar.log(`ERROR GETTING FIVE BOTS ${error}`)
+        // rollbar.log(`ERROR GETTING FIVE BOTS ${error}`)
         console.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
     }
@@ -67,7 +67,7 @@ app.post('/api/duel', (req, res) => {
             res.status(200).send('You won!')
         }
     } catch (error) {
-        rollbar.log(`ERROR DUELING ${error}`)
+        // rollbar.log(`ERROR DUELING ${error}`)
         console.log('ERROR DUELING', error)
         res.sendStatus(400)
     }
