@@ -1,17 +1,14 @@
 require('dotenv').config();
 const express = require('express')
-const cors = require('cors')
 const app = express()
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
 
-const {SERVER_PORT} = process.env;
+const {SERVER_PORT, ROLLBAR_ACCESSTOKEN} = process.env;
 
-// const { Rollbar } = require('rollbar')
 var Rollbar = require('rollbar')
 app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
-app.use(cors());
 
 // include and initialize the rollbar library with your access token
 var rollbar = new Rollbar({
